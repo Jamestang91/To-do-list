@@ -1,0 +1,14 @@
+{% extends 'main.html' %}
+{% load static %}
+{% block content %}
+    {% include 'header.html' %}
+<div class="task-wrapper form-control" id="login">
+    <form method="POST">
+        {% csrf_token %}
+        {{form.as_p}}
+        <input class="button" type="submit" value="login">
+    </form>
+    <p>Dont have an account? <a href="{% url 'register' %}">Register</a></p>
+</div>
+
+{% endblock content %}

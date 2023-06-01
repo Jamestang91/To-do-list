@@ -1,0 +1,43 @@
+{% extends 'main.html' %}
+{% load static %}
+{% block content %}
+    {% include 'header.html' %}
+    <div class="task-wrapper">
+        <div class="row">
+            <div class="col1">
+                <ul>
+                    {% if activities %}
+                        {% for activity in activities %}
+                            <li>{{ activity }}</li>
+                        {% endfor %}
+                    {% elif future_activities %}
+                        {% for activity in future_activities %}
+                            <li>{{ activity }}</li>
+                        {% endfor %}
+                    {% else %}
+                        <li>No activities found.</li>
+                    {% endif %}
+                </ul>
+            </div>
+            <div class="col2">
+                <div type="text" id="datepicker"></div>
+            </div>
+        </div>
+    </div>
+<script>
+    $(function() {
+      // Activate the datepicker
+      $( "#datepicker" ).datepicker({
+         dateFormat: "yy-mm-dd",
+         showOtherMonths: true,
+         selectOtherMonths: true,
+         changeMonth: true,
+         changeYear: true,
+         onSelect: function(date) {
+          // redirect to the URL with the selected date parameter
+          window.location.href = '/calendar/?selected_date=' + date;
+        }
+      });
+    });
+</script>
+{% endblock %}

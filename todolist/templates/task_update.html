@@ -1,0 +1,12 @@
+{% extends 'main.html' %}
+{% load static %}
+{% block content %}
+    {% include 'header.html' %}
+    <div class="task-wrapper form-control" id="format">
+        <form method="POST">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <input class="button" type="submit" value="Update">
+        </form>
+    </div>
+{% endblock content %}

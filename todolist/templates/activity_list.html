@@ -1,0 +1,45 @@
+
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Activity List</title>
+  <!-- include jQuery library -->
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <!-- include jQuery UI library -->
+  <script src="https://code.jquery.com/ui/1.13.0/jquery-ui.min.js"></script>
+  <!-- include jQuery UI CSS -->
+  <link rel="stylesheet" href="https://code.jquery.com/ui/1.13.0/themes/smoothness/jquery-ui.css">
+  <script>
+    $(function() {
+      // initialize the date picker
+      $('#datepicker').datepicker({
+        dateFormat: 'yy-mm-dd',
+        onSelect: function(date) {
+          // redirect to the URL with the selected date parameter
+          window.location.href = '/activity/?selected_date=' + date;
+        }
+      });
+    });
+  </script>
+</head>
+<body>
+  <h1>Activity List</h1>
+  <!-- display the date picker -->
+  <label for="datepicker">Select Date:</label>
+  <input type="text" id="datepicker">
+  <!-- display the activities for the selected date or today's date -->
+  <ul>
+  {% if activities %}
+    {% for activity in activities %}
+      <li>{{ activity }}</li>
+    {% endfor %}
+  {% elif future_activities %}
+    {% for activity in future_activities %}
+      <li>{{ activity }}</li>
+    {% endfor %}
+  {% else %}
+    <li>No activities found.</li>
+  {% endif %}
+  </ul>
+</body>
+</html>
